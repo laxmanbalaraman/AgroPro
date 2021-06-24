@@ -1,0 +1,35 @@
+<html>
+  <head>
+  <script type="text/javascript" src="https://me.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=g4ZlEFcs2UGkUE7dQMI6A2QoosMGigdIflmDi1m2Puhnsc-zox1EmKcS-NdIM1ghrrM7phcUx7IIGd2sgXKWFhhArliFdI-9zV2IIjaSLpQyPPVBsJNj1Y8mxq2PbMBaDQpDkbAG--1abzlBIQoRRQ" charset="UTF-8"></script><script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+  <link href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" rel="stylesheet"/>
+
+  <script>
+  function map()
+  {
+    var element = document.getElementById('osm-map');
+
+    // Height has to be set. You can do this in CSS too.
+    element.style = 'height:300px;';
+  
+    // Create Leaflet map on map element.
+    var map = L.map(element);
+  
+    // Add OSM tile leayer to the Leaflet map.
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+  // Target's GPS coordinates.
+    var target = L.latLng('12.996890', '80.255870');
+  
+  // Set map's center to target with zoom 14.
+    map.setView(target, 14);
+  
+  // Place a marker on the same location.
+    L.marker(target).addTo(map);
+  }
+</script>
+</head>
+  <body onload="map()">
+<div id="osm-map"></div>
+</body> 
+</html>

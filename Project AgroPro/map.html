@@ -1,0 +1,74 @@
+<html>
+  <head>
+  <script type="text/javascript" src="https://me.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=FKsABYVCBipRAILQGnI1sdTiKJGBaWprCApSHYv6IuvnlwS2kOiMp2oob7GYatcIQ_hEZ3yL3whRvfAGifGSHfp53Bmd9ukEarYKU9odm8wiqrOTPiFMkk2Rv6VIii0GjhP2Ya2d4l40105uDQONKw" charset="UTF-8"></script><script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+  <link href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" rel="stylesheet"/>
+
+  <script>
+  function map()
+  {
+    
+    if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var positionInfo = "Your current position is (" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " + position.coords.longitude + ")";
+                document.getElementById("result").innerHTML = positionInfo;
+                var lat=position.coords.latitude;
+                var long=position.coords.longitude;
+                var element = document.getElementById('osm-map');
+
+// Height has to be set. You can do this in CSS too.
+element.style = 'height:300px;';
+
+// Create Leaflet map on map element.
+var map = L.map(element);
+
+// Add OSM tile leayer to the Leaflet map.
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+// Target's GPS coordinates.
+var target = L.latLng(lat,long);
+
+// Set map's center to target with zoom 14.
+map.setView(target, 14);
+
+// Place a marker on the same location.
+var marker = new L.marker(target, {
+    draggable: true,
+    autoPan: true
+}).addTo(map);
+
+        marker.on("drag", function(e) {
+            var marker = e.target;
+            var position = marker.getLatLng();
+            map.panTo(new L.LatLng(position.lat, position.lng));
+            document.getElementById("lati").value=position.lat;
+            document.getElementById("longi").value=position.lng; 
+        });
+        lat2 = 17.29819876772392;
+        lng2 = 78.46435546875;
+        var target2 = L.latLng(17.29819876772392,78.46435546875);
+        new L.marker(target2, {
+}).addTo(map);
+
+               
+            });
+        
+        }
+ 
+  } 
+    
+   
+</script>
+</head>
+  <body >
+    <div id="result">
+        <!--Position information will be inserted here-->
+    </div>
+<button type="button" onclick="map();">Show Position</button>
+<input type="text" id="lati" >
+<input type="text" id="longi" >
+<div id="osm-map"></div>
+
+
+</body> 
+</html>
